@@ -36,11 +36,12 @@ describe('UsersService', () => {
     const response = {
       id: 'uuid-generated-mock',
       email: userMockDto.email,
-      password: userMockDto.password,
+      password: 'hashed_password',
     };
     repository.save.mockReturnValue(response);
     const res = await service.register(userMockDto);
     expect(res).toEqual(response);
     expect(repository.save).toHaveBeenCalledTimes(1);
+    expect(response.password).not.toEqual(userMockDto.password);
   });
 });
