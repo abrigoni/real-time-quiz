@@ -1,6 +1,11 @@
 import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 import { UserRegisterDto } from './dtos/user-register.dto';
 import { UserLoginDto } from './dtos/user-login.dto';
 
@@ -10,6 +15,9 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Post('/register')
+  @ApiCreatedResponse({
+    description: 'Successful registration.',
+  })
   async register(
     @Body()
     registerDto: UserRegisterDto,
@@ -19,6 +27,12 @@ export class UsersController {
   }
 
   @Post('/login')
+  @ApiUnauthorizedResponse({
+    description: 'Incorrect email or password',
+  })
+  @ApiOkResponse({
+    description: 'Successful login, followed by user data and JWT',
+  })
   async login(
     @Body()
     loginDto: UserLoginDto,
