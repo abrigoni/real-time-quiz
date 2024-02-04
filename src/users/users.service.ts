@@ -17,4 +17,9 @@ export class UsersService {
     user.password = password;
     return this.usersRepository.save(user);
   }
+  public async findUserByEmail(email: string): Promise<User> {
+    return this.usersRepository.findOne({
+      where: { email: email.toLowerCase() },
+    });
+  }
 }
