@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
+import { QuizzesModule } from './quizzes/quizzes.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AuthGuard } from './auth/auth.guard';
       signOptions: { expiresIn: '1d' },
     }),
     AuthModule,
+    QuizzesModule,
   ],
   controllers: [AppController],
   providers: [
