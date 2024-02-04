@@ -9,11 +9,12 @@ export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
   @Post('/register')
-  async create(
+  async register(
     @Body()
     registerDto: UserRegisterDto,
   ) {
     const user = await this.userService.register(registerDto);
+    delete user.password;
     return user;
   }
 }

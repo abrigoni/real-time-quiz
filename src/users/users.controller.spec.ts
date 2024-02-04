@@ -5,7 +5,6 @@ import { UsersService } from './users.service';
 const mockUser = {
   id: 'uuid',
   email: 'email@test.com',
-  password: 'Passw0rd!',
 };
 
 describe('UsersController', () => {
@@ -32,15 +31,15 @@ describe('UsersController', () => {
 
   it('should register a user', async () => {
     service.register.mockReturnValue(mockUser);
-    const user = await controller.create({
+    const user = await controller.register({
       email: 'email@test.com',
       password: 'Passw0rd',
     });
-    expect(user).toEqual(mockUser);
     expect(service.register).toHaveBeenCalledTimes(1);
     expect(service.register).toHaveBeenCalledWith({
       email: 'email@test.com',
       password: 'Passw0rd',
     });
+    expect(user).toEqual(mockUser);
   });
 });
