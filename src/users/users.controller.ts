@@ -37,7 +37,7 @@ export class UsersController {
     @Body()
     loginDto: UserLoginDto,
   ) {
-    const user = await this.userService.findUserByEmail(loginDto.email);
+    let user = await this.userService.findUserByEmail(loginDto.email);
     if (user === null) {
       throw new UnauthorizedException('Invalid credentials');
     }
@@ -46,7 +46,11 @@ export class UsersController {
     if (!validAuth) {
       throw new UnauthorizedException('Invalid credentials');
     }
-
-    return this.userService.formatUser(user);
+    user = this.userService.formatUser(user);
+    const accessToken = await this.userService.generateToken(user);
+    return {
+      user,
+      accessToken,
+    };
   }
 }
