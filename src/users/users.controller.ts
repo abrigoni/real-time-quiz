@@ -8,12 +8,14 @@ import {
 } from '@nestjs/swagger';
 import { UserRegisterDto } from './dtos/user-register.dto';
 import { UserLoginDto } from './dtos/user-login.dto';
+import { Public } from '../auth/auth.guard';
 
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
+  @Public()
   @Post('/register')
   @ApiCreatedResponse({
     description: 'Successful registration.',
@@ -26,6 +28,7 @@ export class UsersController {
     return this.userService.formatUser(user);
   }
 
+  @Public()
   @Post('/login')
   @ApiUnauthorizedResponse({
     description: 'Incorrect email or password',
