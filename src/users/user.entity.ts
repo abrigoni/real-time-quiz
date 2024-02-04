@@ -14,7 +14,8 @@ export class User {
   password: string;
 
   @BeforeInsert()
-  private async hashPassword(): Promise<void> {
+  private async beforeInsert(): Promise<void> {
     this.password = await bcrypt.hash(this.password, ROUNDS);
+    this.email = this.email.toLowerCase();
   }
 }
