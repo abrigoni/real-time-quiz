@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { ROUNDS } from 'src/utils/constants';
+import { ROUNDS } from '../utils/constants';
 
 @Entity({ name: 'users' })
 export class User {
