@@ -33,11 +33,13 @@ describe('UsersController', () => {
     service.register.mockReturnValue(mockUser);
     const user = await controller.register({
       email: 'email@test.com',
+      username: 'emailtest',
       password: 'Passw0rd',
     });
     expect(service.register).toHaveBeenCalledTimes(1);
     expect(service.register).toHaveBeenCalledWith({
       email: 'email@test.com',
+      username: 'emailtest',
       password: 'Passw0rd',
     });
     expect(user).toEqual(mockUser);

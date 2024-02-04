@@ -11,11 +11,15 @@ export class User {
   email: string;
 
   @Column()
+  username: string;
+
+  @Column()
   password: string;
 
   @BeforeInsert()
   private async beforeInsert(): Promise<void> {
     this.password = await bcrypt.hash(this.password, ROUNDS);
     this.email = this.email.toLowerCase();
+    this.username = this.username.toLowerCase();
   }
 }

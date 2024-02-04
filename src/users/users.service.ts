@@ -17,9 +17,10 @@ export class UsersService {
     return user;
   }
 
-  public async register({ email, password }: UserRegisterDto) {
+  public async register({ email, password, username }: UserRegisterDto) {
     const user = new User();
     user.email = email;
+    user.username = username;
     user.password = password;
     return this.usersRepository.save(user);
   }

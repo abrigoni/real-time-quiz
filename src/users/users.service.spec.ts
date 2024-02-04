@@ -31,11 +31,13 @@ describe('UsersService', () => {
   it('should register an user successfully', async () => {
     const userMockDto: UserRegisterDto = {
       email: 'john@doe.com',
+      username: 'john.doe',
       password: 'Passw0rd!',
     };
     const response = {
       id: 'uuid-generated-mock',
       email: userMockDto.email,
+      username: 'john.doe',
       password: 'hashed_password',
     };
     repository.save.mockReturnValue(response);
