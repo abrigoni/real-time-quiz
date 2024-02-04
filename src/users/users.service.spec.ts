@@ -4,9 +4,17 @@ import { UserRegisterDto } from './dtos/user-register.dto';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { JwtService } from '@nestjs/jwt';
-import { UserLoginDto } from './dtos/user-login.dto';
 import * as bcrypt from 'bcrypt';
+import { ROUNDS } from '../utils/constants';
 
+const password = 'Passw0rd!';
+const mockUser = {
+  id: 'uuid',
+  email: 'john.doe@test.com',
+  password: bcrypt.hashSync(password, ROUNDS),
+  username: 'john.doe',
+  beforeInsert: jest.fn(),
+};
 describe('UsersService', () => {
   let userService: UsersService;
   let jwtService: JwtService;
@@ -67,56 +75,20 @@ describe('UsersService', () => {
   });
 
   it('should return false on wrong credentials', async () => {
-    const payload: UserLoginDto = {
-      email: 'john@doe.com',
-      password: 'Passw0rd!',
-    };
-    const mockUser = {
-      id: 'uuid',
-      email: payload.email,
-      password: 'hashed_password',
-      username: 'john.doe',
-      beforeInsert: jest.fn(),
-    };
-    repository.findOne.mockReturnValue(mockUser);
-
-    jest.spyOn(bcrypt, 'compare').mockImplementation(() => false);
-
     // @TODO: common but improve typing
     const res = await userService.login(
       mockUser as unknown as User,
-      'Passw0rd!',
+      'This is an incorrect password :D',
     );
-
-    expect(bcrypt.compare).toHaveBeenCalledTimes(1);
-    expect(bcrypt.compare).toHaveBeenCalledWith('Passw0rd!', 'hashed_password');
     expect(res).toEqual(false);
   });
 
   it('should return true on valid credentials', async () => {
-    const payload: UserLoginDto = {
-      email: 'john@doe.com',
-      password: 'Passw0rd!',
-    };
-    const mockUser = {
-      id: 'uuid',
-      email: payload.email,
-      password: 'hashed_password',
-      username: 'john.doe',
-      beforeInsert: jest.fn(),
-    };
-    repository.findOne.mockReturnValue(mockUser);
-
-    jest.spyOn(bcrypt, 'compare').mockImplementation(() => true);
-
     // @TODO: common but improve typing
     const res = await userService.login(
       mockUser as unknown as User,
       'Passw0rd!',
     );
-
-    expect(bcrypt.compare).toHaveBeenCalledTimes(1);
-    expect(bcrypt.compare).toHaveBeenCalledWith('Passw0rd!', 'hashed_password');
     expect(res).toEqual(true);
   });
 });
