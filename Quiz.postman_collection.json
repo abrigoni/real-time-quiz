@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "5c62bdb4-f10b-4a14-9ee2-101e50c6e710",
+		"name": "Quiz",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6177361"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"bRiAn+3@test.com\",\n    \"username\": \"brian3\",\n    \"password\": \"passw0rd!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users/register",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"brian+3@test.com\",\n    \"password\": \"passw0rd!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users/login",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Quizzes",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTA4Y2E4LTBkNTEtNDJmMS04Y2EyLTUwMzQyMTU4YzllNSIsInVzZXJuYW1lIjoiYnJpYW4zIiwiZW1haWwiOiJicmlhbiszQHRlc3QuY29tIiwiaWF0IjoxNzA3MDgxODU4LCJleHAiOjE3MDcxNjgyNTh9.4PuUltUQybKx6yD8bjpSMm_BuuDVwRlkCKSNR_4f1o8",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"My Quiz 4\",\n    \"questions\": [\n        {\n            \"question\": \"My question 4?\",\n            \"answers\": [\n                {\n                    \"answer\": \"Napoleon2\",\n                    \"correct\": true\n                },\n                {\n                    \"answer\": \"San Martin2\",\n                    \"correct\": false\n                },\n                {\n                    \"answer\": \"Ragnar2\",\n                    \"correct\": false\n                }\n            ]\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/quizzes",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"quizzes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/quizzes",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"quizzes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/quizzes/d1ea0320-06f5-4d76-bd41-8efa85c22a97",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"quizzes",
+								"d1ea0320-06f5-4d76-bd41-8efa85c22a97"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTA4Y2E4LTBkNTEtNDJmMS04Y2EyLTUwMzQyMTU4YzllNSIsInVzZXJuYW1lIjoiYnJpYW4zIiwiZW1haWwiOiJicmlhbiszQHRlc3QuY29tIiwiaWF0IjoxNzA3MDc4MjAyLCJleHAiOjE3MDcxNjQ2MDJ9.gjFtI1ATmknj3-zeqC1x-2cYXkcu5Wd4xcN6bcX4bNg",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_URL",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
