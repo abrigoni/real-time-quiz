@@ -15,7 +15,7 @@ export class Answer {
   @Column()
   answer: string;
 
-  @Column()
+  @Column({ select: false })
   correct: boolean;
 
   @ManyToOne(() => Question, (question) => question.answers)

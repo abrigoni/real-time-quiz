@@ -20,7 +20,7 @@ export class QuizzesService {
   public async getById(id: string) {
     return this.quizzesRepository.findOne({
       where: { id },
-      relations: { questions: true },
+      relations: ['questions', 'questions.answers'],
     });
   }
 
