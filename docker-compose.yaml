@@ -11,6 +11,12 @@ services:
       - "${DB_PORT}:5432"
     volumes:
       - psql_volume:/var/lib/postgresql/data
+  nats:
+    image: nats:latest
+    ports:
+      - 4222:4222
+      - 8222:8222
+    command: ["-p", "4222", "-m", "8222"]
 
 volumes:
   psql_volume:
