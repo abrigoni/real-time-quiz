@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { QuizzesService } from './quizzes.service';
+import { QuizzesService } from './services/quizzes.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Quiz } from './entities/quiz.entity';
 

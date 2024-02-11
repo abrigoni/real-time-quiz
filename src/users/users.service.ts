@@ -33,6 +33,9 @@ export class UsersService {
     });
   }
 
+  public async getById(id: string): Promise<User> {
+    return this.usersRepository.findOne({ where: { id } });
+  }
   public async login(user: User, password: string): Promise<boolean> {
     return bcrypt.compare(password, user.password);
   }
