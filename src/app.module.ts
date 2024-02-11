@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
 import { QuizzesModule } from './quizzes/quizzes.module';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
@@ -21,6 +22,15 @@ import { QuizzesModule } from './quizzes/quizzes.module';
     }),
     AuthModule,
     QuizzesModule,
+    ClientsModule.register([
+      {
+        name: 'NATS_SERVICE',
+        transport: Transport.NATS,
+        options: {
+          servers: [process.env.NATS_URL],
+        },
+      },
+    ]),
   ],
   controllers: [AppController],
   providers: [
